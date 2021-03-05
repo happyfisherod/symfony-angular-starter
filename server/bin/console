@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use App\Kernel;
+use Composer\Autoload\ClassLoader;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Dotenv\Dotenv;
+
+set_time_limit(0);
+
+/** @var ClassLoader $loader */
+$loader = require __DIR__.'/../vendor/autoload.php';
+
+$input = new ArgvInput();
+
+$env = $input->getParameterOption(['--env', '-e'], $_SERVER['APP_ENV'] ?? 'dev');
+if ($env === 'dev') {
+    $dotenv = new Dotenv();
+    $dotenv->load(__DIR__.'/../.env');
+}
+
+$debug = ($_SERVER['APP_DEBUG'] ?? ($env !== 'prod')) && !$input->hasParameterOption(['--no-debug', '']);
+if ($debug) {
+    umask(0000);
+
+    if (class_exists(Debug::class)) {
+        /** @noinspection ForgottenDebugOutputInspection */
+        Debug::enable();
+    }
+}
+
+$kernel = new Kernel($env, $debug);
+$application = new Application($kernel);
+/** @noinspection PhpUnhandledExceptionInspection */
+$application->run($input);

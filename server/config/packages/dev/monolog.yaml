@@ -1,0 +1,26 @@
+monolog:
+    handlers:
+        main:
+            bubble: false
+            channels:
+                - '!event'
+                - '!doctrine'
+                - '!console'
+            level: warning
+            path: 'php://stderr'
+            type: stream
+        dev:
+            channels:
+                - '!event'
+                - '!doctrine'
+                - '!console'
+            level: debug
+            path: 'php://stdout'
+            type: stream
+        console:
+            channels:
+                - '!event'
+                - '!doctrine'
+                - '!console'
+            process_psr_3_messages: false
+            type: console

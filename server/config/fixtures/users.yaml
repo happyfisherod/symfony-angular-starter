@@ -1,0 +1,51 @@
+App\Entity\User:
+
+    user_super:
+        firstname: '<firstName()>'
+        lastname: '<lastName()>'
+        email: 'super@symfonyangularstarter'
+        username: 'super'
+        plainPassword: 'super'
+        enabled: true
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+
+    user_admin:
+        firstname: '<firstName()>'
+        lastname: '<lastName()>'
+        email: 'admin@symfonyangularstarter'
+        username: 'admin'
+        plainPassword: 'admin'
+        enabled: true
+        roles:
+            - 'ROLE_ADMIN'
+
+    user_user:
+        firstname: '<firstName()>'
+        lastname: '<lastName()>'
+        email: 'user@symfonyangularstarter'
+        username: 'user'
+        plainPassword: 'user'
+        enabled: true
+        roles:
+            - 'ROLE_USER'
+
+    user_bighead:
+        firstname: 'Nelson'
+        lastname: 'Bighetti'
+        email: 'nelson.bighetti@hooli.xyz'
+        username: 'password'
+        plainPassword: 'password'
+        enabled: true
+        roles:
+            - 'ROLE_USER'
+
+    user_{1..10}:
+        firstname: '<firstName()>'
+        lastname: '<lastName()>'
+        email (unique): '<email()>'
+        username (unique): '<username()>'
+        plainPassword: 'P@ssw0rd'
+        enabled: true
+        roles:
+            - 'ROLE_USER'

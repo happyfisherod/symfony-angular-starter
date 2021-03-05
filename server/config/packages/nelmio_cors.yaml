@@ -1,0 +1,14 @@
+nelmio_cors:
+    defaults:
+        allow_headers:
+            - '*'
+        allow_methods:
+            - '*'
+        allow_origin:
+            - '*'
+        expose_headers:
+            - Link
+            - Location
+        max_age: 600
+    paths:
+        ^/: ~
